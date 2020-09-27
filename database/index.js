@@ -54,33 +54,49 @@ const insertCities = (cities) => {
 };
 
 const insertRandomLocations = (countries, cities) => {
-  let query = 'INSERT INTO randomLocations (country, cities) VALUES (?, ?)', promises = [];
+  let query = 'INSERT INTO randomLocations (locations) VALUES (?)', promises = [];
 
   for (let i = 0; i < 100; i++) {
-    let country = countries[Math.floor(Math.random() * countries.length)];
-    let cityCollection = cities[country], cityChances = {}, sum = [], total;
+   let locationCollection = {}, sum = [], total;
 
-    for (let i = 0; i < cityCollection.length; i++) {
-      sum.push(Math.floor(Math.random() * 100));
-    }
+   for (let i = 0; i < countries.length; i++) {
+    sum.push(Math.floor(Math.random() * 100));
+   }
 
-    total = sum.reduce((cumulative, num) => {
-      return cumulative += num;
-    }, 0);
+   total = sum.reduce((accumulated, num) => {
+     return accumulated += num;
+   }, 0);
 
-    cityCollection.forEach((city, index) => {
-      cityChances[city] = (sum[index]/total);
+    countries.forEach((country, index) => {
+      locationCollection[country] = {'chance': (sum[index]/total), 'cities': randomCities(country, cities)};
     })
 
-    let saveCityData = new Promise((resolve, reject) => {
-      connection.query(query, [country, JSON.stringify(cityChances)], (err) => {
+    let saveProjectLocation = new Promise ((resolve, reject) => {
+      connection.query(query, [JSON.stringify(locationCollection)], (err) => {
         err ? reject(err) : resolve();
       })
-    })
-    promises.push(saveCityData);
+    });
+    promises.push(saveProjectLocation);
   }
   return Promise.all(promises);
-}
+};
+
+const randomCities = (country, cities) => {
+  let cityCollection = [], randomNums = [], total;
+
+  for (let i = 0; i < cities[country].length; i++) {
+    randomNums.push(Math.floor(Math.random() * 100));
+  }
+
+  total = randomNums.reduce((accumulated, num) => {
+    return accumulated += num;
+  }, 0);
+
+  cities[country].forEach((city, index) => {
+    cityCollection.push({[city]: (randomNums[index]/total)});
+  });
+  return cityCollection;
+};
 
 module.exports = {
   insertLocations,

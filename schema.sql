@@ -25,8 +25,7 @@ CREATE TABLE cities (
 
 CREATE TABLE randomLocations (
   id int NOT NULL AUTO_INCREMENT,
-  country VARCHAR (100) NOT NULL,
-  cities VARCHAR (300) NOT NULL,
+  locations VARCHAR (2200) NOT NULL,
   PRIMARY KEY (id)
 );
 
