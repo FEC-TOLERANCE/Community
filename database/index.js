@@ -53,8 +53,38 @@ const insertCities = (cities) => {
   return Promise.all(promises);
 };
 
+const insertRandomLocations = (countries, cities) => {
+  let query = 'INSERT INTO randomLocations (country, cities) VALUES (?, ?)', promises = [];
+
+  for (let i = 0; i < 100; i++) {
+    let country = countries[Math.floor(Math.random() * countries.length)];
+    let cityCollection = cities[country], cityChances = {}, sum = [], total;
+
+    for (let i = 0; i < cityCollection.length; i++) {
+      sum.push(Math.floor(Math.random() * 100));
+    }
+
+    total = sum.reduce((cumulative, num) => {
+      return cumulative += num;
+    }, 0);
+
+    cityCollection.forEach((city, index) => {
+      cityChances[city] = (sum[index]/total);
+    })
+
+    let saveCityData = new Promise((resolve, reject) => {
+      connection.query(query, [country, JSON.stringify(cityChances)], (err) => {
+        err ? reject(err) : resolve();
+      })
+    })
+    promises.push(saveCityData);
+  }
+  return Promise.all(promises);
+}
+
 module.exports = {
   insertLocations,
   insertCountries,
-  insertCities
+  insertCities,
+  insertRandomLocations
 }

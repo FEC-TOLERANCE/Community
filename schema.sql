@@ -23,6 +23,13 @@ CREATE TABLE cities (
   PRIMARY KEY (id)
 );
 
+CREATE TABLE randomLocations (
+  id int NOT NULL AUTO_INCREMENT,
+  country VARCHAR (100) NOT NULL,
+  cities VARCHAR (300) NOT NULL,
+  PRIMARY KEY (id)
+);
+
 -- for locations table
 -- INSERT INTO locations (country_id, city_id) VALUES (1, 1);
 -- INSERT INTO locations (country_id, city_id) VALUES (1, 2);
