@@ -57,7 +57,7 @@ const insertRandomLocations = (countries, cities) => {
   let query = 'INSERT INTO randomLocations (locations) VALUES (?)', promises = [];
 
   for (let i = 0; i < 100; i++) {
-   let locationCollection = {}, sum = [], total;
+   let locationCollection = {}, sum = [], total, cityIndex = 1;
 
    for (let i = 0; i < countries.length; i++) {
     sum.push(Math.floor(Math.random() * 100));
@@ -68,7 +68,8 @@ const insertRandomLocations = (countries, cities) => {
    }, 0);
 
     countries.forEach((country, index) => {
-      locationCollection[country] = {'chance': (sum[index]/total), 'cities': randomCities(country, cities)};
+      locationCollection[index + 1] = {'chance': (sum[index]/total), 'cities': randomCities(country, cities, cityIndex)};
+      cityIndex += cities[country].length;
     })
 
     let saveProjectLocation = new Promise ((resolve, reject) => {
@@ -81,7 +82,7 @@ const insertRandomLocations = (countries, cities) => {
   return Promise.all(promises);
 };
 
-const randomCities = (country, cities) => {
+const randomCities = (country, cities, cityIndex) => {
   let cityCollection = [], randomNums = [], total;
 
   for (let i = 0; i < cities[country].length; i++) {
@@ -93,7 +94,8 @@ const randomCities = (country, cities) => {
   }, 0);
 
   cities[country].forEach((city, index) => {
-    cityCollection.push({[city]: (randomNums[index]/total)});
+    cityCollection.push({[cityIndex]: (randomNums[index]/total)});
+    cityIndex++;
   });
   return cityCollection;
 };
