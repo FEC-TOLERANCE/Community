@@ -105,7 +105,7 @@ const getLocations = (projectId) => {
 
   return new Promise((resolve, reject) => {
     connection.query(query, [projectId], (err, results) => {
-      err ? reject(err) : resolve(JSON.parse(results[0].locations));
+      err ? reject(err) : resolve(results);
     })
   });
 };

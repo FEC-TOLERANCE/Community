@@ -28,6 +28,8 @@ const parseLocations = (countryNames, cityNames, countryChances, cityChances) =>
       })
       return allLocations;
     })
+    //need to add in error catching here
+    .catch()
 };
 
 const parseObjectToArray = (objectArray) => {

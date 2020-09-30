@@ -11,6 +11,13 @@ app.get('/community/:projectId', (req, res) => {
 
   Promise.resolve(db.getLocations(projectId))
     .then(projectLocations => {
+
+      if (projectLocations.length === 0) {
+        throw new Error('Invalid project id. The provided project id is out of range.');
+      } else {
+        projectLocations = JSON.parse(projectLocations[0].locations)
+      }
+
       let countries = Object.keys(projectLocations);
 
       for (let country in projectLocations) {
@@ -34,13 +41,13 @@ app.get('/community/:projectId', (req, res) => {
       return finalLocations;
     })
     .then(locations => {
-      res.send(locations);
+      res.status(200).send(locations);
     })
     .catch(err => {
-      res.send(err);
+      res.status(400).json({'Error Message': err.message});
     })
 });
 
 app.listen(port, () => {
   console.log(`app listening at http://localhost:${port}`)
-});
+})
