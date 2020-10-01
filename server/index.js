@@ -2,54 +2,87 @@ const express = require('express');
 const app = express();
 const port = 3000;
 const db = require('../database/index.js');
-const parser = require('./parser.js');
 
 app.use(express.static(__dirname + '/../client/dist'));
 
 app.get('/community/:projectId', (req, res) => {
-  let projectId = req.params.projectId, cityIds = [], countryChance = [], cityChance = [], countryNames = [], cityNames = [], finalLocations;
+  let projectId = req.params.projectId
 
-  Promise.resolve(db.getLocations(projectId))
+  db.getLocations(projectId)
     .then(projectLocations => {
-
       if (projectLocations.length === 0) {
         let e = new Error ('Invalid project id. The provided project id is out of range.');
-        e.name = 'invalidProjetId';
+        e.name = 'invalidProjectId';
         throw e;
       } else {
         projectLocations = JSON.parse(projectLocations[0].locations)
       }
 
-      let countries = Object.keys(projectLocations);
+      let countryIds = Object.keys(projectLocations), cities = Object.values(projectLocations), promises = [];
 
-      for (let country in projectLocations) {
-        let cities = projectLocations[country].cities;
-        countryChance.push(projectLocations[country].chance);
+      countryIds.forEach(country => {
+        const getCountryName = new Promise((resolve) => {
+          resolve(db.getCountry(country));
+        })
+        promises.push(getCountryName);
+      });
+
+      return Promise.all(promises)
+        .then(countryNames => {
+          let countries = countryNames.flat().map(name => name.country), locations = [];
+
+          countries.forEach((country, index) => {
+            locations.push({[country]: cities[index]});
+          });
+          return locations;
+        });
+    })
+    .then(namedCountryLocations => {
+      let countryNames = namedCountryLocations.map(country => Object.keys(country)[0]);
+      let cityIds = [], promises  = [];
+
+      namedCountryLocations.map((country, index) => {
+        let cities = country[countryNames[index]].cities;
 
         cities.forEach(city => {
           cityIds.push(Object.keys(city)[0]);
-          cityChance.push(Object.values(city)[0]);
         });
-      }
-      return db.getCountry(countries);
+      });
+
+      cityIds.forEach(cityId => {
+        const getCityName = new Promise((resolve) => {
+          resolve(db.getCity(cityId));
+        });
+        promises.push(getCityName);
+      });
+
+      return Promise.all(promises)
+        .then(cityNames => {
+          let allCityNames = cityNames.flat().map(name => name.city);
+          let count = 0;
+
+          namedCountryLocations.forEach((country, index) => {
+            let cityProperty = country[countryNames[index]].cities, countryName = countryNames[index];
+            let cityProbabilities = cityProperty.map(city => Object.values(city)[0]);
+            let cities = [];
+
+            cityProbabilities.forEach((probability) => {
+              cities.push({[allCityNames[count]]: probability});
+              count++;
+            })
+            namedCountryLocations[index][countryName].cities = cities;
+          })
+          return namedCountryLocations;
+        })
     })
-    .then(allCountries => {
-      countryNames = allCountries.flat();
-      return db.getCity(cityIds);
-    })
-    .then(allCities => {
-      cityNames = allCities.flat();
-      finalLocations = parser.parseLocations(countryNames, cityNames, countryChance, cityChance);
-      return finalLocations;
-    })
-    .then(locations => {
-      res.status(200).send(locations);
+    .then(parsedLocations => {
+      res.status(200).send(parsedLocations);
     })
     .catch(err => {
       if (err.name === 'invalidProjectId') {
-        res.status(400).json({'Error Message': `${err.message}`});
-      } else if (err.name = 'parserError') {
-        res.status(500).json({'Error Message': `${err.message}`});
+        res.status(400).json(err.message);
+      } else {
+        res.status(500);
       }
     })
 });

@@ -110,43 +110,25 @@ const getLocations = (projectId) => {
   });
 };
 
-const getCountry = (countryIds) => {
-  let query = 'SELECT country FROM countries where id = ?', promises = [];
-
-  countryIds.forEach(country => {
-    let countryName = new Promise((resolve, reject) => {
-      connection.query(query, [country], (err, results) => {
-        err ? reject(err) : resolve(results);
-      })
-    })
-    promises.push(countryName);
-  })
-  return Promise.all(promises);
-};
-
-const getCity = (cityIds) => {
-  let query = 'SELECT city FROM cities where id = ?', promises = [];
-
-  cityIds.forEach(city => {
-    let cityName = new Promise((resolve, reject) => {
-      connection.query(query, [city], (err, results) => {
-        err ? reject(err) : resolve(results);
-      })
-    })
-    promises.push(cityName);
-  })
-  return Promise.all(promises);
-};
-
-const getCountryLength = (countryId) => {
-  let query = 'SELECT city_id FROM locations INNER JOIN countries ON locations.country_id = countries.id WHERE countries.id = ?';
+const getCountry = (countryId => {
+  let query = 'SELECT country from countries where id = ?';
 
   return new Promise((resolve, reject) => {
     connection.query(query, [countryId], (err, results) => {
-      err ? reject(err) : resolve(results.length);
+      err ? reject(err) : resolve(results);
     })
-  });
-};
+  })
+});
+
+const getCity = (cityId => {
+  let query = 'SELECT city FROM cities where id = ?';
+
+  return new Promise((resolve, reject) => {
+    connection.query(query, [cityId], (err, results) => {
+      err ? reject(err) : resolve(results);
+    })
+  })
+});
 
 module.exports = {
   insertLocations,
@@ -155,6 +137,5 @@ module.exports = {
   insertRandomLocations,
   getLocations,
   getCountry,
-  getCity,
-  getCountryLength
+  getCity
 }
