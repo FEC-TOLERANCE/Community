@@ -13,7 +13,9 @@ app.get('/community/:projectId', (req, res) => {
     .then(projectLocations => {
 
       if (projectLocations.length === 0) {
-        throw new Error('Invalid project id. The provided project id is out of range.');
+        let e = new Error ('Invalid project id. The provided project id is out of range.');
+        e.name = 'invalidProjetId';
+        throw e;
       } else {
         projectLocations = JSON.parse(projectLocations[0].locations)
       }
@@ -44,7 +46,11 @@ app.get('/community/:projectId', (req, res) => {
       res.status(200).send(locations);
     })
     .catch(err => {
-      res.status(400).json({'Error Message': err.message});
+      if (err.name === 'invalidProjectId') {
+        res.status(400).json({'Error Message': `${err.message}`});
+      } else if (err.name = 'parserError') {
+        res.status(500).json({'Error Message': `${err.message}`});
+      }
     })
 });
 

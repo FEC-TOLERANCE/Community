@@ -28,8 +28,11 @@ const parseLocations = (countryNames, cityNames, countryChances, cityChances) =>
       })
       return allLocations;
     })
-    //need to add in error catching here
-    .catch()
+    .catch(err => {
+      let e = new Error(err);
+      e.name = 'parserError';
+      return e;
+    })
 };
 
 const parseObjectToArray = (objectArray) => {
