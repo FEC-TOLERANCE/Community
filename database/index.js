@@ -100,9 +100,42 @@ const randomCities = (country, cities, cityIndex) => {
   return cityCollection;
 };
 
+const getLocations = (projectId) => {
+  let query = 'SELECT locations FROM randomLocations WHERE id = ?';
+
+  return new Promise((resolve, reject) => {
+    connection.query(query, [projectId], (err, results) => {
+      err ? reject(err) : resolve(results);
+    })
+  });
+};
+
+const getCountry = (countryId => {
+  let query = 'SELECT country from countries where id = ?';
+
+  return new Promise((resolve, reject) => {
+    connection.query(query, [countryId], (err, results) => {
+      err ? reject(err) : resolve(results);
+    })
+  })
+});
+
+const getCity = (cityId => {
+  let query = 'SELECT city FROM cities where id = ?';
+
+  return new Promise((resolve, reject) => {
+    connection.query(query, [cityId], (err, results) => {
+      err ? reject(err) : resolve(results);
+    })
+  })
+});
+
 module.exports = {
   insertLocations,
   insertCountries,
   insertCities,
-  insertRandomLocations
+  insertRandomLocations,
+  getLocations,
+  getCountry,
+  getCity
 }
