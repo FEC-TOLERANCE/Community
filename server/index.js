@@ -5,6 +5,8 @@ const db = require('../database/index.js');
 
 app.use(express.static(__dirname + '/../client/dist'));
 
+console.log(app);
+
 app.get('/community/:projectId', (req, res) => {
   let projectId = req.params.projectId
 
