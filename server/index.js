@@ -2,8 +2,12 @@ const express = require('express');
 const app = express();
 const port = 3000;
 const db = require('../database/index.js');
+const cors = require('cors');
+
+app.use(cors());
 
 app.use(express.static(__dirname + '/../client/dist'));
+app.use('/:projectId',express.static(__dirname + '/../client/dist'));
 
 app.get('/community/:projectId', (req, res) => {
   let projectId = req.params.projectId
