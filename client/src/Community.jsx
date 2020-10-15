@@ -9,9 +9,9 @@ function Community() {
 
   useEffect(() => {
     let currentUrl = window.location.href.split('/');
-    let url = currentUrl[0] + '//' + currentUrl[2], projectId = currentUrl[3];
+    let projectId = currentUrl[3];
 
-    axios.get(`${url}/community/${projectId}`)
+    axios.get(`http://localhost:3000/community/${projectId}`)
       .then(locations => {
         setLocation(locations.data);
       })
