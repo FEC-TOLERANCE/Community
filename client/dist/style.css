@@ -1,0 +1,53 @@
+#container {
+  vertical-align: baseline;
+  margin-right: auto;
+  margin-left: auto;
+  padding-right: 10%;
+  padding-left: 10%;
+}
+
+#cities {
+  display:block;
+  float: left;
+  width: 50%;
+}
+
+#countries {
+  display: block;
+  float: left;
+  width: 50%;
+}
+
+#countryTitle {
+  text-align: center;
+  font-size: 100%;
+  line-height: 1.5;
+  font-size: 125%;
+}
+
+#countryTitle2 {
+  text-align: center;
+  line-height: 1.5;
+  font-size: 125%;
+  border-bottom: 1px solid #F1EEEA;
+  margin-bottom: 2rem;
+}
+
+#countryContainer {
+  box-sizing: border-box;
+  max-height: 450px;
+  margin-bottom: 4.2rem;
+  position: relative;
+}
+
+.countryEntry {
+  margin-bottom: 1.2rem;
+}
+
+.countryName {
+  float: left;
+}
+
+.countryValue {
+  text-align: right;
+}

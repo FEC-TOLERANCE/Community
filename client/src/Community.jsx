@@ -18,11 +18,21 @@ function Community() {
       .catch(err => {
         throw new Error(err);
       })
+
+      axios.get(`http://localhost:3004/funding/${projectId}`)
+        .then(headerInfo => {
+          console.log(headerInfo);
+          let numOfBackers = headerInfo.data.backing.backers;
+          setBackers(numOfBackers);
+        })
+        .catch(err => {
+          throw new Error(err);
+        })
   }, [])
 
   return (
     <div>
-      <Origin locations = {locations}/>
+      <Origin locations = {locations} backers = {backers}/>
     </div>
   )
 }

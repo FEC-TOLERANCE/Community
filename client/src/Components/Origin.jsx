@@ -22,6 +22,10 @@ function Origin (props) {
 
       return b[countryNameB] - a[countryNameA];
     })
+
+    sortedCountries.forEach(country => {
+      country[Object.keys(country)] = Math.floor(Object.values(country)[0] * props.backers);
+    })
     setCountries(sortedCountries);
   };
 
@@ -35,12 +39,12 @@ function Origin (props) {
       <div id='countries'>
         <div id='countryTitle'>Where Backers Come From</div>
         <div id='countryTitle2'>Top Countries</div>
-        <div id='countryContainer'>
+        <div className='countryContainer'>
           {topCountries.map((country, index) => {
             return (
               <div className='countryEntry' key={index}>
-                <div>{Object.keys(country)}</div>
-                <div>{Object.values(country)}</div>
+                <div className='countryName'>{Object.keys(country)}</div>
+                <div className='countryValue'>{Object.values(country)} backers</div>
               </div>
             )
           })}
