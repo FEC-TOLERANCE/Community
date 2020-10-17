@@ -6,16 +6,37 @@
   padding-left: 10%;
 }
 
+#cityTitle {
+  text-align: center;
+  font-size: 100%;
+  line-height: 1.5;
+  font-size: 125%;
+}
+
+#cityTitle2 {
+  text-align: center;
+  line-height: 1.5;
+  font-size: 125%;
+  border-bottom: 1px solid #F1EEEA;
+  margin-bottom: 2rem;
+}
+
 #cities {
   display:block;
   float: left;
   width: 50%;
+  box-sizing: border-box;
+  padding-right: 1.5rem;
+  padding-left: 1.5rem;
 }
 
 #countries {
   display: block;
   float: left;
   width: 50%;
+  box-sizing: border-box;
+  padding-right: 1.5rem;
+  padding-left: 1.5rem;
 }
 
 #countryTitle {
