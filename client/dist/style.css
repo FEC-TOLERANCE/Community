@@ -6,19 +6,26 @@
   padding-left: 10%;
 }
 
-#cityTitle {
+.title {
   text-align: center;
   font-size: 100%;
   line-height: 1.5;
   font-size: 125%;
 }
 
-#cityTitle2 {
+.title2 {
   text-align: center;
   line-height: 1.5;
   font-size: 125%;
   border-bottom: 1px solid #F1EEEA;
   margin-bottom: 2rem;
+}
+
+.individualContainer {
+  box-sizing: border-box;
+  max-height: 450px;
+  margin-bottom: 4.2rem;
+  position: relative;
 }
 
 #cities {
@@ -39,36 +46,15 @@
   padding-left: 1.5rem;
 }
 
-#countryTitle {
-  text-align: center;
-  font-size: 100%;
-  line-height: 1.5;
-  font-size: 125%;
-}
-
-#countryTitle2 {
-  text-align: center;
-  line-height: 1.5;
-  font-size: 125%;
-  border-bottom: 1px solid #F1EEEA;
-  margin-bottom: 2rem;
-}
-
-#countryContainer {
-  box-sizing: border-box;
-  max-height: 450px;
-  margin-bottom: 4.2rem;
-  position: relative;
-}
-
-.countryEntry {
+.locationEntry {
   margin-bottom: 1.2rem;
 }
 
-.countryName {
+.locationName {
   float: left;
+  white-space: pre;
 }
 
-.countryValue {
+.locationValue {
   text-align: right;
 }

@@ -21,7 +21,6 @@ function Community() {
 
       axios.get(`http://localhost:3004/funding/${projectId}`)
         .then(headerInfo => {
-          console.log(headerInfo);
           let numOfBackers = headerInfo.data.backing.backers;
           setBackers(numOfBackers);
         })
