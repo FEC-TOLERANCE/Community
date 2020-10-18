@@ -2,6 +2,7 @@ import React, { useState, useEffect } from 'react';
 import ReactDOM from 'react-dom';
 import axios from 'axios';
 import Origin from './Components/Origin.jsx';
+import Backers from './Components/Backers.jsx';
 
 function Community() {
   const [backers, setBackers] = useState(0);
@@ -32,6 +33,7 @@ function Community() {
   return (
     <div>
       <Origin locations = {locations} backers = {backers}/>
+      <Backers backers = {backers}/>
     </div>
   )
 }
