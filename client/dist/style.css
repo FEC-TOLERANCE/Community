@@ -4,6 +4,7 @@
   margin-left: auto;
   padding-right: 10%;
   padding-left: 10%;
+  height: 450px;
 }
 
 .title {
@@ -57,4 +58,53 @@
 
 .locationValue {
   text-align: right;
+}
+
+#backerContainer {
+  display: block;
+  padding-right: 10%;
+  padding-left: 10%;
+  padding-bottom: 8.4rem;
+  height: 450px;
+}
+
+.backerSection {
+  padding-left: 2rem;
+  padding-right: 2rem;
+  background-color: #FFFFFF;
+  box-shadow: none;
+  border: 1px solid #E8E8E8;
+  height: 80%;
+  box-sizing: border-box;
+}
+
+.newBackers {
+  border-right: 1px solid #F1EEEA;
+  float: left;
+  text-align: center;
+  width: 50%;
+}
+
+h4 {
+  font-size: 14px;
+  line-height: 20px;
+}
+
+.count {
+  color: #282828;
+  font-size: 95px;
+  padding: 3rem 0px;
+  letter-spacing: -1px;
+}
+
+.description {
+  width: 50%;
+  margin: auto;
+  color: #656969;
+}
+
+.oldBackers {
+  float: left;
+  text-align: center;
+  width: 49%
 }
