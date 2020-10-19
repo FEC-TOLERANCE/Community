@@ -2,6 +2,7 @@ import React, { useState, useEffect } from 'react';
 import ReactDOM from 'react-dom';
 import axios from 'axios';
 import Origin from './Components/Origin.jsx';
+import Backers from './Components/Backers.jsx';
 
 function Community() {
   const [backers, setBackers] = useState(0);
@@ -18,11 +19,21 @@ function Community() {
       .catch(err => {
         throw new Error(err);
       })
+
+      axios.get(`http://localhost:3004/funding/${projectId}`)
+        .then(headerInfo => {
+          let numOfBackers = headerInfo.data.backing.backers;
+          setBackers(numOfBackers);
+        })
+        .catch(err => {
+          throw new Error(err);
+        })
   }, [])
 
   return (
     <div>
-      <Origin locations = {locations}/>
+      <Origin locations = {locations} backers = {backers}/>
+      <Backers backers = {backers}/>
     </div>
   )
 }
