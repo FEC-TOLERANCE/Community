@@ -3,10 +3,12 @@ import ReactDOM from 'react-dom';
 import axios from 'axios';
 import Origin from './Components/Origin.jsx';
 import Backers from './Components/Backers.jsx';
+import Author from './Components/Author.jsx';
 
 function Community() {
   const [backers, setBackers] = useState(0);
   const [locations, setLocation] = useState([]);
+  const [author, setAuthor] = useState('');
 
   useEffect(() => {
     let currentUrl = window.location.href.split('/');
@@ -23,7 +25,18 @@ function Community() {
       axios.get(`http://localhost:3004/funding/${projectId}`)
         .then(headerInfo => {
           let numOfBackers = headerInfo.data.backing.backers;
+
           setBackers(numOfBackers);
+        })
+        .catch(err => {
+          throw new Error(err);
+        })
+
+      axios.get(`http://localhost:3003/project-owner/${projectId}`)
+        .then(projectOwnerInfo => {
+          let authorName = projectOwnerInfo.data.name;
+
+          setAuthor(authorName);
         })
         .catch(err => {
           throw new Error(err);
@@ -32,6 +45,7 @@ function Community() {
 
   return (
     <div>
+      <Author author = {author} backers = {backers}/>
       <Origin locations = {locations} backers = {backers}/>
       <Backers backers = {backers}/>
     </div>
