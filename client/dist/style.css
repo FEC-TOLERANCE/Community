@@ -1,10 +1,11 @@
-#container {
+#originContainer {
   vertical-align: baseline;
   margin-right: auto;
   margin-left: auto;
   padding-right: 10%;
   padding-left: 10%;
   height: 450px;
+  padding-top: 2%;
 }
 
 .title {
@@ -107,4 +108,22 @@ h4 {
   float: left;
   text-align: center;
   width: 49%
+}
+
+.authorContainer {
+  padding: 7rem;
+  background-color: #FFFFFF;
+  background-image: none;
+  background-size: 100% auto;
+  background-repeat: no-repeat;
+  background-position: center center;
+  border-bottom: 1px solid #E8E8E8;
+  color: #282828;
+  text-align: center;
+  position: relative;
+}
+
+.authorDetails {
+  text-align: center;
+  font-size: 1.5rem;
 }
