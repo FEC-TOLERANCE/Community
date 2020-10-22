@@ -9,6 +9,7 @@ function Community() {
   const [backers, setBackers] = useState(0);
   const [locations, setLocation] = useState([]);
   const [author, setAuthor] = useState('');
+  const [newBackers, setNewBackers] = useState(0);
 
   useEffect(() => {
     let currentUrl = window.location.href.split('/');
@@ -24,8 +25,9 @@ function Community() {
 
       axios.get(`http://localhost:3004/funding/${projectId}`)
         .then(headerInfo => {
-          let numOfBackers = headerInfo.data.backing.backers;
+          let numOfBackers = headerInfo.data.backing.backers, percentNewBackers = headerInfo.data.backing.newFundersPercent;
 
+          setNewBackers(percentNewBackers);
           setBackers(numOfBackers);
         })
         .catch(err => {
@@ -47,7 +49,7 @@ function Community() {
     <div>
       <Author author = {author} backers = {backers}/>
       <Origin locations = {locations} backers = {backers}/>
-      <Backers backers = {backers}/>
+      <Backers backers = {backers} newBackers = {newBackers}/>
     </div>
   )
 }

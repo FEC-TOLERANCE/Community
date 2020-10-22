@@ -5,8 +5,7 @@ function Backers (props) {
   const [returningBackers, setReturning] = useState(0);
 
   useEffect(() => {
-    let newBackers = Math.random(), returningBackers = 1 - newBackers;
-    let numOfNewBackers = Math.floor(props.backers * newBackers), numOfReturningBackers = props.backers - numOfNewBackers;
+    let numOfNewBackers = Math.floor(props.backers * props.newBackers), numOfReturningBackers = props.backers - numOfNewBackers;
 
     setNew(numOfNewBackers.toLocaleString());
     setReturning(numOfReturningBackers.toLocaleString());
