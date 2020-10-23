@@ -1,23 +1,25 @@
-#container {
+#originContainer {
   vertical-align: baseline;
   margin-right: auto;
   margin-left: auto;
   padding-right: 10%;
   padding-left: 10%;
   height: 450px;
+  padding-top: 2%;
+  width: 40%;
 }
 
 .title {
   text-align: center;
   font-size: 100%;
   line-height: 1.5;
-  font-size: 125%;
+  font-size: 1.5rem;
 }
 
 .title2 {
   text-align: center;
   line-height: 1.5;
-  font-size: 125%;
+  font-size: 1.5rem;
   border-bottom: 1px solid #F1EEEA;
   margin-bottom: 2rem;
 }
@@ -54,10 +56,13 @@
 .locationName {
   float: left;
   white-space: pre;
+  color: #2752ff;
 }
 
 .locationValue {
   text-align: right;
+  font-size: 0.9rem;
+  color: #656969;
 }
 
 #backerContainer {
@@ -66,6 +71,10 @@
   padding-left: 10%;
   padding-bottom: 8.4rem;
   height: 450px;
+  width: 40%;
+  margin-right: auto;
+  margin-left: auto;
+  margin-top: 2%;
 }
 
 .backerSection {
@@ -107,4 +116,22 @@ h4 {
   float: left;
   text-align: center;
   width: 49%
+}
+
+.authorContainer {
+  padding: 7rem;
+  background-color: #FFFFFF;
+  background-image: none;
+  background-size: 100% auto;
+  background-repeat: no-repeat;
+  background-position: center center;
+  border-bottom: 1px solid #E8E8E8;
+  color: #282828;
+  text-align: center;
+  position: relative;
+}
+
+.authorDetails {
+  text-align: center;
+  font-size: 1.5rem;
 }

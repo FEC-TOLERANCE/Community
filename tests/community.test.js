@@ -79,3 +79,7 @@ describe('Database functions', () => {
     })
   });
 });
+
+describe('React Interface', () => {
+
+});
