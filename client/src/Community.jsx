@@ -15,7 +15,7 @@ function Community() {
     let currentUrl = window.location.href.split('/');
     let projectId = currentUrl[3];
 
-    axios.get(`http://localhost:3000/community/${projectId}`)
+    axios.get(`http://ec2-54-67-1-177.us-west-1.compute.amazonaws.com:3000/community/${projectId}`)
       .then(locations => {
         setLocation(locations.data);
       })
@@ -23,7 +23,7 @@ function Community() {
         throw new Error(err);
       })
 
-      axios.get(`http://localhost:3004/funding/${projectId}`)
+      axios.get(`http://3.12.73.115:3004/funding/${projectId}`)
         .then(headerInfo => {
           let numOfBackers = headerInfo.data.backing.backers, percentNewBackers = headerInfo.data.backing.newFundersPercent;
 
@@ -34,7 +34,7 @@ function Community() {
           throw new Error(err);
         })
 
-      axios.get(`http://localhost:3003/project-owner/${projectId}`)
+      axios.get(`http://ec2-3-15-177-95.us-east-2.compute.amazonaws.com:3003/project-owner/${projectId}`)
         .then(projectOwnerInfo => {
           let authorName = projectOwnerInfo.data.name;
 
