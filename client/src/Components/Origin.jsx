@@ -7,7 +7,7 @@ function Origin (props) {
   useEffect(() => {
     getTopCountries(props.locations);
     getTopCities(props.locations);
-  }, [props.locations]);
+  }, [props.locations, props.backers]);
 
   const getTopCountries = (countries) => {
     let filteredCountries = [], sortedCountries = [];
