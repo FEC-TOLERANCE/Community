@@ -88,11 +88,10 @@
   float: left;
   text-align: center;
   width: 50%;
+  margin-top: 20px;
 }
 
 .backers-specific-title {
-  margin-top: 20px;
-  margin-bottom: 20px;
   font-size: 14px;
   line-height: 3rem;
 }
@@ -114,7 +113,8 @@
 .oldBackers {
   float: left;
   text-align: center;
-  width: 49%
+  width: 49%;
+  margin-top: 20px;
 }
 
 .authorContainer {
