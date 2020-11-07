@@ -16,12 +16,12 @@ function Backers (props) {
       <div className='backerSection'>
         <div className='backerTypes'>
           <div className='newBackers'>
-            <h4>New Backers</h4>
+            <h4 className='backers-specific-title'>New Backers</h4>
             <div className='count'>{newBackers}</div>
             <div className='description'>backers had never backed a project on Kickstarter before</div>
           </div>
           <div className='oldBackers'>
-            <h4>Returning Backers</h4>
+            <h4 className='backers-specific-title'>Returning Backers</h4>
             <div className='count'>{returningBackers}</div>
             <div className='description'>backers had backed a project on Kickstarter before</div>
           </div>
