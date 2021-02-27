@@ -1,22 +1,45 @@
-# Project Name
+<img src='https://cdn.techinasia.com/wp-content/uploads/2015/06/kickstarter-logo.jpg' />
 
-> Community
+Table of Contents
+-----------------
+- [Description](#Description)
+- [Getting Started](#Getting-Started)
+  * [Dependencies](#Dependencies)
+  * [Set up](#Set-up)
+- [Schema](#Schema)
+- [Routes](#Routes)
+- [Application Demo](#Application-Demo)
 
-## Related Projects
+Description
+-----------
+This is a clone application designed to mimick the community component of Kickstarter! The application was designed with React, Express, and MySQL.
 
-  -https://github.com/FEC-TOLERANCE/Community
+Getting Started
+---------------
+### Dependencies
+- Node >= v6.13.0
+- MySQL v5.7
 
-## Usage
+### Set up
+1. Run `npm install` to install the neccesary dependencies.
+2. Run `npm run seed` to seed the database with 100 random locations around the world.
+3. Run `npm run react` to compile all public files into a bundle.
+4. Run `npm run server` to serve up the files at port 3000.
 
-> Community Component for KickStarter
+Schema
+------
+<img src='https://i.imgur.com/690140w.png' width=200 height=350>
 
-## Requirements
+Routes
+------
+GET route for static files
 
-## Development
+    /:projectId
 
-### Installing Dependencies
+GET route for
 
-From within the root directory:
+    /community/:projectId
 
-npm install (for all dependeices),
-npm run seed (to create the database and seed it with the mock data)
+Application Demo
+----------------
+<img src='https://i.imgur.com/Ps2sTHN.png'>
